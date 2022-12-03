@@ -45,7 +45,7 @@ async def give_filter(client, message):
 async def next_page(bot, query):
     ident, req, key, offset = query.data.split("_")
     if int(req) not in [query.from_user.id, 0]:
-        return await query.answer("𝖳𝗁𝗂𝗌 𝗂𝗌 𝗇𝗈𝗍 𝖿𝗈𝗋 𝗒𝗈𝗎...", show_alert=True)
+        return await query.answer("𝐓𝐡𝐢𝐬 𝐢𝐬 𝐍𝐨𝐭 𝐅𝐨𝐫 𝐘𝐨𝐮!", show_alert=True)
     try:
         offset = int(offset)
     except:
@@ -68,7 +68,7 @@ async def next_page(bot, query):
         btn = [
             [
                 InlineKeyboardButton(
-                    text=f"🔖{get_size(file.file_size)}🔮{file.file_name}", callback_data=f'files#{file.file_id}'
+                    text=f"[{get_size(file.file_size)}] {file.file_name}", callback_data=f'files#{file.file_id}'
                 ),
             ]
             for file in files
@@ -691,14 +691,14 @@ async def auto_filter(client, msg, spoll=False):
         ]
     btn.insert(0, 
         [
-            InlineKeyboardButton(f'🎭 {search} 🎭', 'reqst1')
+            InlineKeyboardButton(f'', 'reqst1')
         ]
     )
     btn.insert(1,
         [
-            InlineKeyboardButton(f'📂 Files: {total_results}', 'dupe'),
-            InlineKeyboardButton(f'🎁 Tips', 'tips'),
-            InlineKeyboardButton(f'📮 Info', 'info')
+            InlineKeyboardButton(f'', 'dupe'),
+            InlineKeyboardButton(f'', 'tips'),
+            InlineKeyboardButton(f'', 'info')
         ]
     )    
 
@@ -708,7 +708,7 @@ async def auto_filter(client, msg, spoll=False):
         req = message.from_user.id if message.from_user else 0
         btn.append(
             [InlineKeyboardButton(text=f"📃 1/{math.ceil(int(total_results) / 10)}", callback_data="pages"),
-             InlineKeyboardButton(text="𝖭𝖤𝖷𝖳 ▶️", callback_data=f"next_{req}_{key}_{offset}")]
+             InlineKeyboardButton(text="Next ⏩", callback_data=f"next_{req}_{key}_{offset}")]
         )
     else:
         btn.append(
